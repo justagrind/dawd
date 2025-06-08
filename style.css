@@ -46,6 +46,15 @@ body {
   font-size: 20px;
   box-sizing: border-box;
   backface-visibility: hidden;
+  user-select: none;
+}
+
+.front {
+  z-index: 2;
+}
+
+.back {
+  transform: rotateY(180deg);
 }
 
 .page-number {
