@@ -1,76 +1,103 @@
+/* Reset & Body */
 body {
   margin: 0;
   padding: 0;
-  background: linear-gradient(135deg, #ffe0ec, #ffd6f0);
-  height: 100vh;
+  background: linear-gradient(135deg, #ffe6f0, #fceabb);
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: 'Segoe UI', sans-serif;
+  height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  user-select: none;
 }
 
+/* Container with perspective for 3D effect */
 .book-container {
-  perspective: 2000px;
+  position: relative;
+  width: 600px;
+  height: 400px;
+  perspective: 2000px; /* Important for 3D flip */
+}
+
+/* Book wrapper */
+#book {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  box-shadow:
+    inset 4px 0 15px rgba(0, 0, 0, 0.15),
+    inset -4px 0 15px rgba(0, 0, 0, 0.15);
+  border-radius: 6px;
+  background: #fefefe;
+}
+
+/* Each page style */
+.page {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: white;
+  border: 1.5px solid #ffcc33;
+  box-shadow:
+    0 5px 10px rgba(0,0,0,0.1),
+    inset 0 0 10px rgba(255, 255, 200, 0.6);
+  border-radius: 4px;
+  padding: 20px;
+  box-sizing: border-box;
+  transform-origin: left;
+  backface-visibility: hidden;
+  transition:
+    transform 0.8s ease,
+    box-shadow 0.8s ease,
+    z-index 0.8s ease;
+  font-size: 1.2rem;
+  color: #444;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 1.5;
+  user-select: none;
+}
+
+/* The flipped page rotates -180deg on Y axis */
+.page.flipped {
+  transform: rotateY(-180deg);
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.3),
+    inset 0 0 25px rgba(255, 255, 230, 0.8);
+  z-index: 0 !important;
+}
+
+/* Controls container */
+.controls {
+  margin-top: 20px;
   text-align: center;
 }
 
-.book {
-  position: relative;
-  width: 400px;
-  height: 280px;
-}
-
-.sheet {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  transform-style: preserve-3d;
-  transition: transform 1s;
-  transform-origin: left;
-}
-
-.sheet .front,
-.sheet .back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-  background: white;
-  border-radius: 8px;
-  padding: 20px;
-  box-sizing: border-box;
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.4rem;
-}
-
-.sheet .back {
-  transform: rotateY(180deg);
-  background: #fffdfc;
-}
-
-.flipped {
-  transform: rotateY(-180deg);
-}
-
-.controls {
-  margin-top: 20px;
-}
-
-button {
-  padding: 10px 15px;
-  margin: 0 10px;
+/* Buttons style */
+.controls button {
+  padding: 10px 25px;
+  margin: 0 15px;
   font-size: 1rem;
-  cursor: pointer;
+  background: #ffcc33;
   border: none;
-  background-color: #ff87ab;
-  color: white;
-  border-radius: 5px;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 5px 8px rgba(255, 204, 51, 0.6);
+  transition: background-color 0.3s ease;
 }
 
-#pageNumber {
-  font-weight: bold;
-  font-size: 1.2rem;
+.controls button:hover {
+  background: #e6b800;
+}
+
+/* Page number styling */
+#page-number {
+  font-weight: 600;
+  font-size: 1.1rem;
+  min-width: 80px;
+  display: inline-block;
+  vertical-align: middle;
+  user-select: none;
 }
