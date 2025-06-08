@@ -1,31 +1,24 @@
-const pages = document.querySelectorAll('.page');
-let currentPage = 0;
+const sheets = document.querySelectorAll('.sheet');
+let currentSheet = 0;
 
-// Set initial z-index values to stack the pages
-pages.forEach((page, index) => {
-  page.style.zIndex = pages.length - index;
-});
-
-function updatePageNumber() {
-  document.getElementById('pageNumber').textContent = currentPage + 1;
+function updatePageDisplay() {
+  document.getElementById('pageNumber').textContent = currentSheet * 2 + 1;
 }
 
 function nextPage() {
-  if (currentPage < pages.length) {
-    pages[currentPage].classList.add('flipped');
-    pages[currentPage].style.zIndex = currentPage; // Send behind
-    currentPage++;
-    updatePageNumber();
+  if (currentSheet < sheets.length) {
+    sheets[currentSheet].classList.add('flipped');
+    currentSheet++;
+    updatePageDisplay();
   }
 }
 
 function prevPage() {
-  if (currentPage > 0) {
-    currentPage--;
-    pages[currentPage].classList.remove('flipped');
-    pages[currentPage].style.zIndex = pages.length - currentPage; // Bring forward again
-    updatePageNumber();
+  if (currentSheet > 0) {
+    currentSheet--;
+    sheets[currentSheet].classList.remove('flipped');
+    updatePageDisplay();
   }
 }
 
-updatePageNumber();
+updatePageDisplay();
