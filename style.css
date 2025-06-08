@@ -1,4 +1,4 @@
-/* Reset & Body */
+/* Reset and Body */
 body {
   margin: 0;
   padding: 0;
@@ -11,93 +11,105 @@ body {
   user-select: none;
 }
 
-/* Container with perspective for 3D effect */
+/* Container with perspective */
 .book-container {
-  position: relative;
   width: 600px;
   height: 400px;
-  perspective: 2000px; /* Important for 3D flip */
+  perspective: 2200px;
+  user-select: none;
+  text-align: center;
 }
 
 /* Book wrapper */
 #book {
+  position: relative;
   width: 100%;
   height: 100%;
-  position: relative;
-  box-shadow:
-    inset 4px 0 15px rgba(0, 0, 0, 0.15),
-    inset -4px 0 15px rgba(0, 0, 0, 0.15);
-  border-radius: 6px;
-  background: #fefefe;
+  margin-bottom: 20px;
 }
 
-/* Each page style */
+/* Each page */
 .page {
   position: absolute;
   width: 100%;
   height: 100%;
-  background: white;
-  border: 1.5px solid #ffcc33;
-  box-shadow:
-    0 5px 10px rgba(0,0,0,0.1),
-    inset 0 0 10px rgba(255, 255, 200, 0.6);
-  border-radius: 4px;
-  padding: 20px;
-  box-sizing: border-box;
+  transform-style: preserve-3d;
+  transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 1s cubic-bezier(0.4, 0, 0.2, 1);
   transform-origin: left;
-  backface-visibility: hidden;
-  transition:
-    transform 0.8s ease,
-    box-shadow 0.8s ease,
-    z-index 0.8s ease;
-  font-size: 1.2rem;
-  color: #444;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow:
+    2px 4px 8px rgba(0, 0, 0, 0.15);
+  background: white;
+}
+
+/* Front and back side */
+.page .front,
+.page .back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 2px solid #f4c542;
+  border-radius: 6px;
+  box-sizing: border-box;
+  padding: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  line-height: 1.5;
+  font-size: 1.3rem;
+  color: #333;
   user-select: none;
+  backface-visibility: hidden;
+  background: linear-gradient(145deg, #fffde7, #fff9c4);
+  box-shadow: inset 0 0 15px rgba(255 255 204 / 0.6);
 }
 
-/* The flipped page rotates -180deg on Y axis */
+/* Back side rotated */
+.page .back {
+  transform: rotateY(180deg);
+}
+
+/* Flipped page */
 .page.flipped {
   transform: rotateY(-180deg);
   box-shadow:
-    0 10px 30px rgba(0,0,0,0.3),
-    inset 0 0 25px rgba(255, 255, 230, 0.8);
+    -5px 10px 20px rgba(0,0,0,0.25),
+    inset 0 0 30px rgba(255 255 204 / 0.8);
   z-index: 0 !important;
 }
 
-/* Controls container */
+/* Controls */
 .controls {
-  margin-top: 20px;
-  text-align: center;
-}
-
-/* Buttons style */
-.controls button {
-  padding: 10px 25px;
-  margin: 0 15px;
-  font-size: 1rem;
-  background: #ffcc33;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  box-shadow: 0 5px 8px rgba(255, 204, 51, 0.6);
-  transition: background-color 0.3s ease;
-}
-
-.controls button:hover {
-  background: #e6b800;
-}
-
-/* Page number styling */
-#page-number {
-  font-weight: 600;
-  font-size: 1.1rem;
-  min-width: 80px;
-  display: inline-block;
-  vertical-align: middle;
   user-select: none;
+}
+
+.controls button {
+  padding: 12px 30px;
+  margin: 0 15px;
+  font-size: 1.1rem;
+  background-color: #f4c542;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 6px 10px rgba(244,197,66,0.5);
+  transition: background-color 0.3s ease;
+  font-weight: 600;
+}
+
+.controls button:hover:not(:disabled) {
+  background-color: #d4a817;
+  box-shadow: 0 8px 15px rgba(212,168,23,0.7);
+}
+
+.controls button:disabled {
+  background-color: #ddd;
+  cursor: default;
+  box-shadow: none;
+}
+
+#page-number {
+  font-weight: 700;
+  font-size: 1.2rem;
+  vertical-align: middle;
 }
