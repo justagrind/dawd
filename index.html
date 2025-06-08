@@ -2,25 +2,24 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Slideshow Notebook</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Birthday Flipbook Card</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
-  <div class="slideshow-container">
-    <div class="slides" id="slides">
-      <div class="slide">📖 Page 1 Content</div>
-      <div class="slide">📄 Page 2 Content</div>
-      <div class="slide">📃 Page 3 Content</div>
-      <div class="slide">📚 Page 4 Content</div>
+  <div class="flipbook-container">
+    <div id="flipbook" class="flipbook">
+      <div class="page front">🎉 Happy Birthday!</div>
+      <div class="page">Wishing you lots of love 🎈</div>
+      <div class="page">Joy, laughter, and cake 🍰</div>
+      <div class="page">Have an amazing day! 🎁</div>
+      <div class="page back">💖 From your friend</div>
     </div>
-  </div>
-
-  <div class="controls">
-    <button id="prevBtn" disabled>← Prev</button>
-    <span id="pageIndicator">Page 1/4</span>
-    <button id="nextBtn">Next →</button>
+    <div class="controls">
+      <button onclick="prevPage()">⏮ Prev</button>
+      <span id="pageNumber">1</span>
+      <button onclick="nextPage()">Next ⏭</button>
+    </div>
   </div>
 
   <script src="script.js"></script>
