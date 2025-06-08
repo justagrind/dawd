@@ -3,24 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Notebook Flip Card</title>
+  <title>Book Style Flip Card</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="card-container">
-    <div class="card">
-      <div class="card-inner" id="cardInner">
-        <div class="card-face front" id="frontFace"></div>
-        <div class="card-face back" id="backFace"><span></span></div>
-      </div>
-    </div>
-    <div class="page-number" id="pageNumber"></div>
-    <div class="button-group">
-      <button id="backBtn" disabled>Back</button>
-      <button id="nextBtn">Next</button>
+    <div class="card" id="card">
+      <div class="card-front">Front Side</div>
+      <div class="card-back">Back Side</div>
     </div>
   </div>
-  
+
   <script src="script.js"></script>
 </body>
 </html>
