@@ -20,6 +20,7 @@ body {
   height: 220px;
   position: relative;
   margin-bottom: 20px;
+  cursor: default;
 }
 
 .card-inner {
@@ -41,4 +42,43 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20
+  padding: 20px;
+  font-size: 20px;
+  box-sizing: border-box;
+  backface-visibility: hidden;
+}
+
+.page-number {
+  font-weight: bold;
+  margin-top: 8px;
+  font-size: 16px;
+  color: #a33b6a;
+  user-select: none;
+}
+
+.button-group {
+  display: flex;
+  gap: 15px;
+}
+
+button {
+  background: #ff7eb9;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 12px;
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.3s;
+}
+
+button:disabled {
+  background: #f9c4d4;
+  cursor: not-allowed;
+}
+
+button:not(:disabled):hover {
+  background: #ff4e96;
+}
