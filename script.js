@@ -11,9 +11,11 @@ document.addEventListener("DOMContentLoaded", () => {
     pages.forEach((page, i) => {
       if (i < currentPage) {
         page.classList.add("flipped");
+        // flipped pages below unflipped pages
         page.style.zIndex = i;
       } else {
         page.classList.remove("flipped");
+        // unflipped pages above flipped pages
         page.style.zIndex = totalPages - i;
       }
     });
