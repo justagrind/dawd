@@ -1,49 +1,57 @@
 body {
   margin: 0;
   padding: 0;
-  background: radial-gradient(circle, #ffe0ec, #ffd6f0);
+  background: linear-gradient(135deg, #ffe0ec, #ffd6f0);
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
   font-family: 'Segoe UI', sans-serif;
 }
 
-.flipbook-container {
-  text-align: center;
+.book-container {
   perspective: 2000px;
+  text-align: center;
 }
 
-.flipbook {
+.book {
   position: relative;
   width: 400px;
   height: 280px;
 }
 
-.page {
+.sheet {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transform-style: preserve-3d;
+  transition: transform 1s;
+  transform-origin: left;
+}
+
+.sheet .front,
+.sheet .back {
   position: absolute;
   width: 100%;
   height: 100%;
+  backface-visibility: hidden;
   background: white;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
   border-radius: 8px;
   padding: 20px;
   box-sizing: border-box;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
   display: flex;
-  align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
-  transform-origin: left center;
-  backface-visibility: hidden;
-  transition: transform 0.8s ease, z-index 0s;
+  align-items: center;
+  font-size: 1.4rem;
 }
 
-/* Differentiated page colors for realism */
-.page:nth-child(odd) {
+.sheet .back {
+  transform: rotateY(180deg);
   background: #fffdfc;
 }
 
-.page.flipped {
+.flipped {
   transform: rotateY(-180deg);
 }
 
