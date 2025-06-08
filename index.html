@@ -3,22 +3,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Notebook Flip Pages</title>
+  <title>Slideshow Notebook</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <div class="book-container">
-    <div class="book" id="book">
-      <div class="page">📖 Page 1</div>
-      <div class="page">📄 Page 2</div>
-      <div class="page">📃 Page 3</div>
-      <div class="page">📚 Page 4</div>
+  <div class="slideshow-container">
+    <div class="slides" id="slides">
+      <div class="slide">📖 Page 1 Content</div>
+      <div class="slide">📄 Page 2 Content</div>
+      <div class="slide">📃 Page 3 Content</div>
+      <div class="slide">📚 Page 4 Content</div>
     </div>
-    <div class="controls">
-      <button id="prevBtn">← Prev</button>
-      <button id="nextBtn">Next →</button>
-    </div>
+  </div>
+
+  <div class="controls">
+    <button id="prevBtn" disabled>← Prev</button>
+    <span id="pageIndicator">Page 1/4</span>
+    <button id="nextBtn">Next →</button>
   </div>
 
   <script src="script.js"></script>
