@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Notebook Flip Card</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="card-container">
+    <div class="card" id="card">
+      <div class="card-inner" id="cardInner">
+        <div class="card-face" id="cardFace">🎉 Click "Next" to begin!</div>
+      </div>
+      <div class="page-number" id="pageNumber">Page 1 / 4</div>
+    </div>
+
+    <div class="button-group">
+      <button id="backBtn">← Back</button>
+      <button id="nextBtn">Next →</button>
+    </div>
+  </div>
+
+  <audio id="flipSound" src="page-flip.mp3" preload="auto"></audio>
+  <script src="script.js"></script>
+</body>
+</html>
