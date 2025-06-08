@@ -2,25 +2,25 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Birthday Flipbook</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Flipbook Birthday Card</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="book-container">
-    <div class="book" id="book">
-      <div class="sheet" id="sheet0"><div class="front">🎉 Happy Birthday!</div><div class="back">Wishing you lots of love 🎈</div></div>
-      <div class="sheet" id="sheet1"><div class="front">Joy, laughter, and cake 🍰</div><div class="back">Have an amazing day! 🎁</div></div>
-      <div class="sheet" id="sheet2"><div class="front">💖 From your friend</div><div class="back">🎂 See you soon!</div></div>
+    <div id="book">
+      <div class="page" style="z-index: 5;">🎉 Happy Birthday! 🎂<br><br>Welcome to your birthday card!</div>
+      <div class="page" style="z-index: 4;">💌 Wishing you a day filled with love and laughter.</div>
+      <div class="page" style="z-index: 3;">🎁 May all your dreams come true this year.</div>
+      <div class="page" style="z-index: 2;">🌟 You're amazing and deserve the best!</div>
+      <div class="page" style="z-index: 1;">🎊 Enjoy your special day to the fullest!</div>
     </div>
-
     <div class="controls">
-      <button onclick="prevPage()">⏮ Prev</button>
-      <span id="pageNumber">1</span>
-      <button onclick="nextPage()">Next ⏭</button>
+      <button onclick="prevPage()">Previous</button>
+      <span id="page-number">Page 1</span>
+      <button onclick="nextPage()">Next</button>
     </div>
   </div>
-
   <script src="script.js"></script>
 </body>
 </html>
