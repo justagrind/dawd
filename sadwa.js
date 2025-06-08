@@ -1,4 +1,3 @@
-
 const steps = [
   "🎉 Click to open your birthday card!",
   "🎂 Here's the next step!",
