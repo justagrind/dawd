@@ -1,52 +1,50 @@
 const pages = document.querySelectorAll('.page');
 const pageNumberElem = document.getElementById('page-number');
-let currentPage = 0;
-const totalPages = pages.length;
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
 
-// Initialize pages: only first page visible (not flipped), others flipped (behind)
+let currentPage = 0;      // Current page index (number of flipped pages)
+const totalPages = pages.length + 1; // total pages = number of page divs + 1 (last back page)
+
+// Initialize pages: first page not flipped, others flipped
 function initPages() {
   pages.forEach((page, i) => {
-    if (i === 0) {
-      page.style.transform = 'rotateY(0deg)';
-      page.style.zIndex = totalPages - i;
-      page.classList.remove('flipped');
-    } else {
-      page.style.transform = 'rotateY(-180deg)';
-      page.style.zIndex = totalPages - i;
+    if(i < currentPage){
       page.classList.add('flipped');
+      page.style.zIndex = i;
+    } else {
+      page.classList.remove('flipped');
+      page.style.zIndex = totalPages - i;
     }
   });
   updatePageNumber();
-}
-initPages();
-
-// Flip page forward
-function nextPage() {
-  if (currentPage >= totalPages - 1) return;
-
-  const page = pages[currentPage];
-  page.classList.add('flipped');
-  page.style.transform = 'rotateY(-180deg)';
-  page.style.zIndex = currentPage; // behind the next pages
-
-  currentPage++;
-  updatePageNumber();
+  updateButtons();
 }
 
-// Flip page backward
-function prevPage() {
-  if (currentPage <= 0) return;
-
-  currentPage--;
-  const page = pages[currentPage];
-  page.classList.remove('flipped');
-  page.style.transform = 'rotateY(0deg)';
-  page.style.zIndex = totalPages - currentPage;
-
-  updatePageNumber();
-}
-
-// Update the page number display
 function updatePageNumber() {
   pageNumberElem.textContent = `Page ${currentPage + 1} / ${totalPages}`;
 }
+
+function updateButtons() {
+  prevBtn.disabled = currentPage === 0;
+  nextBtn.disabled = currentPage === totalPages - 1;
+}
+
+function nextPage() {
+  if(currentPage < totalPages -1){
+    currentPage++;
+    initPages();
+  }
+}
+
+function prevPage() {
+  if(currentPage > 0){
+    currentPage--;
+    initPages();
+  }
+}
+
+prevBtn.addEventListener('click', prevPage);
+nextBtn.addEventListener('click', nextPage);
+
+initPages();
