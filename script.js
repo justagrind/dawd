@@ -1,53 +1,56 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const pages = document.querySelectorAll(".page");
-  const pageNumberElem = document.getElementById("page-number");
-  const prevBtn = document.getElementById("prevBtn");
-  const nextBtn = document.getElementById("nextBtn");
+const pages = document.querySelectorAll('.page');
+const nextBtn = document.getElementById('nextBtn');
+const prevBtn = document.getElementById('prevBtn');
+const pageNum = document.getElementById('pageNum');
 
-  let currentPage = 0; // number of flipped pages
-  const totalPages = pages.length + 1; // total pages including last back page
+let currentPage = 0;
 
-  function initPages() {
-    pages.forEach((page, i) => {
-      if (i < currentPage) {
-        page.classList.add("flipped");
-        // flipped pages below unflipped pages
-        page.style.zIndex = i;
-      } else {
-        page.classList.remove("flipped");
-        // unflipped pages above flipped pages
-        page.style.zIndex = totalPages - i;
-      }
-    });
-    updatePageNumber();
-    updateButtons();
-  }
-
-  function updatePageNumber() {
-    pageNumberElem.textContent = `Page ${currentPage + 1} / ${totalPages}`;
-  }
-
-  function updateButtons() {
-    prevBtn.disabled = currentPage === 0;
-    nextBtn.disabled = currentPage === totalPages - 1;
-  }
-
-  function nextPage() {
-    if (currentPage < totalPages - 1) {
-      currentPage++;
-      initPages();
+function updateBook() {
+  pages.forEach((page, i) => {
+    if (i <= currentPage) {
+      page.style.transform = 'rotateY(-180deg)';
+    } else {
+      page.style.transform = 'rotateY(0deg)';
     }
+  });
+  pageNum.textContent = `${currentPage + 1} / ${pages.length}`;
+}
+
+// Navigation buttons
+nextBtn.addEventListener('click', () => {
+  if (currentPage < pages.length - 1) {
+    currentPage++;
+    updateBook();
   }
-
-  function prevPage() {
-    if (currentPage > 0) {
-      currentPage--;
-      initPages();
-    }
-  }
-
-  prevBtn.addEventListener("click", prevPage);
-  nextBtn.addEventListener("click", nextPage);
-
-  initPages();
 });
+
+prevBtn.addEventListener('click', () => {
+  if (currentPage > 0) {
+    currentPage--;
+    updateBook();
+  }
+});
+
+// Touch swipe support
+let startX = 0;
+
+document.addEventListener('touchstart', (e) => {
+  startX = e.touches[0].clientX;
+});
+
+document.addEventListener('touchend', (e) => {
+  let endX = e.changedTouches[0].clientX;
+  let diff = endX - startX;
+
+  if (Math.abs(diff) > 50) {
+    if (diff < 0 && currentPage < pages.length - 1) {
+      currentPage++;
+    } else if (diff > 0 && currentPage > 0) {
+      currentPage--;
+    }
+    updateBook();
+  }
+});
+
+// Initialize
+updateBook();
