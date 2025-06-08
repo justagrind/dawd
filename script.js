@@ -34,7 +34,7 @@ function flipForward() {
   if (currentStep >= steps.length - 1) return;
   currentStep++;
   isFrontShowing = !isFrontShowing;
-  cardInner.style.transform = isFrontShowing ? 'rotateY(0deg)' : 'rotateY(180deg)';
+  cardInner.style.transform = isFrontShowing ? 'rotateX(0deg)' : 'rotateX(180deg)';
   updateContent();
 }
 
@@ -42,7 +42,7 @@ function flipBack() {
   if (currentStep <= 0) return;
   currentStep--;
   isFrontShowing = !isFrontShowing;
-  cardInner.style.transform = isFrontShowing ? 'rotateY(0deg)' : 'rotateY(180deg)';
+  cardInner.style.transform = isFrontShowing ? 'rotateX(0deg)' : 'rotateX(180deg)';
   updateContent();
 }
 
