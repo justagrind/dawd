@@ -2,41 +2,131 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Flipbook Birthday Card</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(135deg, #ffe6f0, #fceabb);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .book-container {
+      position: relative;
+      width: 90vw;
+      max-width: 600px;
+      height: 400px;
+      perspective: 2000px;
+      border: 8px solid #fff;
+      border-radius: 16px;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+      background: #fafafa;
+    }
+
+    #book {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+    }
+
+    .page {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: #fffbe6;
+      border-left: 1px solid #ddd;
+      box-shadow: 3px 3px 8px rgba(0,0,0,0.1);
+      transform-origin: left center;
+      transition: transform 1s;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .page-content {
+      font-size: 1.2em;
+      line-height: 1.5;
+      color: #444;
+    }
+
+    .nav-buttons {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-buttons button {
+      padding: 10px 20px;
+      font-size: 1em;
+      border: none;
+      border-radius: 8px;
+      background: #ff69b4;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .nav-buttons button:hover {
+      background: #ff1493;
+    }
+  </style>
 </head>
 <body>
   <div class="book-container">
     <div id="book">
       <div class="page" style="z-index: 5;">
-        <h2>Happy Birthday!</h2>
-        <p>Wishing you a day full of love, laughter, and joy.</p>
+        <div class="page-content">Page 1: Happy Birthday! 🎉</div>
       </div>
       <div class="page" style="z-index: 4;">
-        <h2>You're Amazing</h2>
-        <p>Keep shining and chasing your dreams!</p>
+        <div class="page-content">Page 2: Wishing you joy and smiles. 😊</div>
       </div>
       <div class="page" style="z-index: 3;">
-        <h2>Memories</h2>
-        <p>May today become one of your fondest memories.</p>
+        <div class="page-content">Page 3: May your day be as sweet as cake! 🎂</div>
       </div>
       <div class="page" style="z-index: 2;">
-        <h2>With Love</h2>
-        <p>From all of us who cherish you.</p>
+        <div class="page-content">Page 4: You deserve all the happiness. 💖</div>
       </div>
       <div class="page" style="z-index: 1;">
-        <h2>The End</h2>
-        <p>Have a fantastic birthday! 🎉</p>
+        <div class="page-content">Page 5: Keep smiling and shining! ✨</div>
       </div>
     </div>
     <div class="nav-buttons">
-      <button id="prevBtn">⟵ Prev</button>
-      <span id="pageNum">1 / 5</span>
-      <button id="nextBtn">Next ⟶</button>
+      <button onclick="prevPage()">⟵ Prev</button>
+      <button onclick="nextPage()">Next ⟶</button>
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <script>
+    const pages = document.querySelectorAll(".page");
+    let currentPage = 0;
+
+    function updatePages() {
+      pages.forEach((page, i) => {
+        page.style.transform = i <= currentPage ? "rotateY(-180deg)" : "rotateY(0deg)";
+      });
+    }
+
+    function nextPage() {
+      if (currentPage < pages.length - 1) {
+        currentPage++;
+        updatePages();
+      }
+    }
+
+    function prevPage() {
+      if (currentPage > 0) {
+        currentPage--;
+        updatePages();
+      }
+    }
+  </script>
 </body>
 </html>
