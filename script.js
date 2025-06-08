@@ -1,43 +1,35 @@
-const pages = Array.from(document.querySelectorAll('.page'));
-const prevBtn = document.getElementById('prevBtn');
-const nextBtn = document.getElementById('nextBtn');
+const slidesEl    = document.getElementById('slides');
+const slides      = document.querySelectorAll('.slide');
+const prevBtn     = document.getElementById('prevBtn');
+const nextBtn     = document.getElementById('nextBtn');
+const pageIndicator = document.getElementById('pageIndicator');
 
 let current = 0;
+const total   = slides.length;
 
-// initial stacking order
-pages.forEach((pg, i) => {
-  pg.style.zIndex = pages.length - i;
-});
+function updateView() {
+  // move slides container
+  slidesEl.style.transform = `translateX(-${current * 100}%)`;
+  // update page number
+  pageIndicator.textContent = `Page ${current + 1}/${total}`;
+  // toggle button disabled states
+  prevBtn.disabled = current === 0;
+  nextBtn.disabled = current === total - 1;
+}
 
-// flip to next page
-nextBtn.addEventListener('click', () => {
-  if (current < pages.length) {
-    pages[current].classList.add('flipped');
-    pages[current].style.zIndex = current + 1;
-    current++;
-    updateButtons();
-  }
-});
-
-// flip back to prev page
 prevBtn.addEventListener('click', () => {
   if (current > 0) {
     current--;
-    pages[current].classList.remove('flipped');
-    pages[current].style.zIndex = pages.length - current;
-    updateButtons();
+    updateView();
   }
 });
 
-// update button disabled states
-function updateButtons() {
-  prevBtn.disabled = current === 0;
-  nextBtn.disabled = current === pages.length;
-}
-
-// also allow clicking the top page to go next
-pages.forEach((pg, idx) => {
-  pg.addEventListener('click', () => {
-    if (idx === current && current < pages.length) nextBtn.click();
-  });
+nextBtn.addEventListener('click', () => {
+  if (current < total - 1) {
+    current++;
+    updateView();
+  }
 });
+
+// initialize
+updateView();
